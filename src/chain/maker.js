@@ -23,10 +23,13 @@ export default async function createMaker(
     }
   };
 
+  console.log('Check if use kovan contracts');
   if (useMcdKovanContracts) {
+    console.log('YESYESYESYES');
     const MKR = createCurrency('MKR');
     const IOU = createCurrency('IOU');
     const kovanMcdAddresses = require('./addresses/kovan-mcd.json');
+
     const addContracts = Object.keys(kovanMcdAddresses).reduce(
       (result, key) => {
         result[key] = { address: { kovan: kovanMcdAddresses[key] } };

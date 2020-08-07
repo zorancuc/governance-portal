@@ -185,6 +185,8 @@ const Timeline = ({
   hat,
   approvals
 }) => {
+  console.log('\n Proposals');
+  console.log(proposals);
   const hatProposal = proposals.find(({ source }) => eq(source, hat.address));
   const governingProposal =
     hatProposal && hatProposal.executed ? hatProposal : null;

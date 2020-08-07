@@ -184,6 +184,7 @@ function Executive({
     return <NotFound />;
   const { active, topicKey } = proposal;
   const supporters = voteState[proposal.source.toLowerCase()] || null;
+
   return (
     <RiseUp>
       <WhiteBackground>
@@ -311,7 +312,4 @@ const reduxProps = ({ proposals, tally, accounts, metamask }, { match }) => {
   };
 };
 
-export default connect(
-  reduxProps,
-  { modalOpen }
-)(Executive);
+export default connect(reduxProps, { modalOpen })(Executive);

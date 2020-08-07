@@ -56,13 +56,14 @@ export function getWinningProp(state, topicKey) {
 
 // Backend ------------------------------------------------
 
-const local = 'http://127.0.0.1:3000';
+const local = 'http://127.0.0.1:3001';
 // const prod = 'https://content.makerfoundation.com';
 // const staging = 'https://elb.content.makerfoundation.com:444';
 const prod = 'https://cms-gov.makerfoundation.com';
 const staging = 'https://elb.cms-gov.makerfoundation.com:444';
 
-const path = 'content/governance-dashboard';
+const path = 'api/proposal/v1/proposals';
+// const path = 'content/governance-dashboard';
 
 // backends
 
@@ -97,7 +98,7 @@ const fetchTopics = async network => {
     return fetchNetwork(staging, network);
   }
 
-  return fetchNetwork(prod, network);
+  return fetchNetwork(local, network);
 };
 
 // Actions ------------------------------------------------
@@ -119,17 +120,24 @@ async function extractProposalsAndGetSdkInfo(topics, network) {
   // if we're using a testnet, overwrite proposal source with provided ganache addresses.
   if (network === 'ganache') updateSourceForTestnet(topics);
 
-  const proposals = topics.reduce((acc, topic) => {
-    const proposals = topic.proposals.map(({ source, ...otherProps }) => ({
-      ...otherProps,
-      source: source.startsWith('{') ? JSON.parse(source)[network] : source,
-      active: topic.active,
-      govVote: topic.govVote,
-      topicKey: topic.key,
-      topicTitle: topic.topic
-    }));
-    return acc.concat(proposals);
-  }, []);
+  console.log('\n Topics');
+  console.log(topics);
+  // const proposals = topics.reduce((acc, topic) => {
+  //   const proposals = topic.proposals.map(({ source, ...otherProps }) => ({
+  //     ...otherProps,
+  //     source: source.startsWith('{') ? JSON.parse(source)[network] : source,
+  //     active: topic.active,
+  //     govVote: topic.govVote,
+  //     topicKey: topic.key,
+  //     topicTitle: topic.topic
+  //   }));
+  //   return acc.concat(proposals);
+  // }, []);
+
+  console.log('\n Extract Proposals');
+  const proposals = topics;
+  console.log(proposals);
+
   return Promise.all(
     proposals.map(async p => {
       if (!p.govVote) {

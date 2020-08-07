@@ -122,6 +122,9 @@ export const sendVote = proposalAddress => (dispatch, getState) => {
 
   const { hat, proposals } = getState();
 
+  console.log('DEBUG FOR HAT, SOURCE');
+  console.log(hat);
+  console.log(proposals);
   const governancePollAddresses = proposals
     .filter(({ govVote }) => govVote)
     .map(({ source }) => source);
