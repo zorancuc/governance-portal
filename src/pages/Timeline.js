@@ -185,11 +185,17 @@ const Timeline = ({
   hat,
   approvals
 }) => {
-  console.log('\n Proposals');
-  console.log(proposals);
+  // console.log('\n Proposals');
+  // console.log("TimeLine Proposals");
+  // console.log(proposals);
   const hatProposal = proposals.find(({ source }) => eq(source, hat.address));
+  // console.log("Hat proposal");
+  // console.log(hatProposal);
   const governingProposal =
     hatProposal && hatProposal.executed ? hatProposal : null;
+
+  // console.log("GoverningProposal");
+  // console.log(governingProposal);
   const otherProposals = proposals.filter(({ source }) => {
     if (governingProposal) return !eq(source, governingProposal.source);
     return true;
