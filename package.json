@@ -55,7 +55,6 @@
     "test": "yarn testchain --ci yarn jest",
     "cover": "yarn testchain --ci yarn jest --coverage",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged",
     "remove-sourcemaps": "rm -rf build/static/js/*.map"
   },
   "lint-staged": {
@@ -116,5 +115,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
